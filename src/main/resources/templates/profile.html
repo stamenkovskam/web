@@ -1,0 +1,14 @@
+<section class="jumbotron text-center" xmlns:th="http://www.thymeleaf.org" >
+    <div class="container">
+        <h1 class="jumbotron-heading" >Settings</h1>
+    </div>
+    <div style="margin: auto">
+        <div>
+            <label>Username: <th:block th:if="${#request.getRemoteUser() != null}"
+                                       th:text="${#request.getRemoteUser()}"></th:block></label>
+        </div>
+        <div></div>
+    </div>
+
+    <a type="button" class="btn btn-primary" href="/">Back</a>
+</section>

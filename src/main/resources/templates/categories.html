@@ -1,0 +1,51 @@
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <section class="jumbotron text-center" style="padding: 1rem 1rem;">
+        <div class="container">
+            <h3 class="jumbotron-heading">All categories</h3>
+        </div>
+    </section>
+    <div class="col mb-3">
+        <div class="row" style="justify-content: center">
+            <div class="col-sm-12 col-md-12" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a href="/categories/add-category" class="btn btn-block btn-dark add-product-btn">
+                    Add new category
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-12" th:if="${categories.size() > 0}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Category name</th>
+                            <th scope="col">Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="category : ${categories}" class="category">
+                            <td th:text="${category.getName()}"></td>
+                            <td th:text="${category.getDescription()}"></td>
+
+                            <td class="text-right">
+                                <th:block >
+                                    <form th:action="@{'/categories/delete/{id}' (id=${category.getId()})}"
+                                          th:method="DELETE">
+                                        <button type="submit"
+                                                class="btn btn-sm btn-danger delete-categories">
+                                            <i class="fa fa-trash">Delete</i>
+                                        </button>
+                                    </form>
+                                </th:block>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
